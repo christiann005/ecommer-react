@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const emailService = require('../utils/emailService');
 
 // Registro de usuario
 exports.register = async (req, res) => {
@@ -23,6 +24,9 @@ exports.register = async (req, res) => {
       email,
       password: hashedPassword
     });
+
+    // Enviar correo de bienvenida (sin esperar para no bloquear la respuesta)
+    emailService.sendWelcomeEmail(user.email, user.username);
 
     res.status(201).json({ message: 'Usuario registrado con éxito.' });
   } catch (error) {

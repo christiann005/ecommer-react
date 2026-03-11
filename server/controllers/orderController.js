@@ -1,4 +1,5 @@
-const { Order, OrderItem, Product } = require('../models');
+const { Order, OrderItem, Product, User } = require('../models');
+const emailService = require('../utils/emailService');
 
 // Crear una nueva orden
 exports.addOrderItems = async (req, res) => {
@@ -27,10 +28,20 @@ exports.addOrderItems = async (req, res) => {
     // Insertar los items en la base de datos
     await OrderItem.bulkCreate(itemsToInsert);
 
-    // Devolver la orden con sus items
+    // Devolver la orden con sus items y datos del usuario para el email
     const createdOrder = await Order.findByPk(order.id, {
-      include: [{ model: OrderItem, include: [Product] }]
+      include: [
+        { model: OrderItem, include: [Product] },
+        { model: User, attributes: ['email', 'username'] }
+      ]
     });
+
+    // Enviar correo de confirmación
+    emailService.sendOrderConfirmation(
+      createdOrder.User.email,
+      createdOrder.User.username,
+      createdOrder
+    );
 
     res.status(201).json(createdOrder);
   } catch (error) {
