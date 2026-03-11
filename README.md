@@ -1,20 +1,100 @@
-<<<<<<< HEAD
-# ecommer-react
-=======
-# React + Vite
+# 🚀 TechStore - FullStack E-commerce
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TechStore es una plataforma de comercio electrónico moderna construida con el stack **PERN** (PostgreSQL, Express, React, Node.js). Incluye funcionalidades avanzadas como autenticación JWT, carrito persistente, sistema de reseñas y un dashboard administrativo con gráficos en tiempo real.
 
-Currently, two official plugins are available:
+## ✨ Características Principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **🛒 Carrito de Compras:** Sincronización automática entre el navegador y la base de datos PostgreSQL.
+- **🔐 Autenticación Completa:** Registro e inicio de sesión seguro utilizando JWT y encriptación de contraseñas con bcrypt.
+- **📊 Dashboard Administrativo:** Panel exclusivo para admins con métricas de ventas, gráficos de tendencias (Recharts) y gestión de inventario.
+- **⭐ Reseñas y Calificaciones:** Los usuarios pueden calificar productos y dejar comentarios.
+- **🔍 Buscador Predictivo:** Sugerencias inteligentes con imágenes y precios mientras escribes.
+- **📱 Diseño Responsive:** Experiencia optimizada para pantalla completa y dispositivos móviles.
 
-## React Compiler
+## 🛠️ Tecnologías Utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Frontend:**
+- React 19 + Vite
+- Context API (Estado Global)
+- Axios (Peticiones HTTP)
+- Lucide-React (Iconos)
+- Sonner (Notificaciones elegantes)
+- Recharts (Visualización de datos)
 
-## Expanding the ESLint configuration
+**Backend:**
+- Node.js & Express
+- PostgreSQL (Base de datos relacional)
+- Sequelize (ORM)
+- JSON Web Token (Seguridad)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
->>>>>>> d551f62 (proyecto de un ecommer en react)
+---
+
+## 🚀 Instalación y Ejecución
+
+Sigue estos pasos para poner en marcha el proyecto en tu máquina local:
+
+### 1. Clonar el repositorio
+```bash
+git clone https://github.com/TU_USUARIO/ecommer-react.git
+cd ecommer-react
+```
+
+### 2. Configuración de la Base de Datos
+Asegúrate de tener **PostgreSQL** instalado y ejecutándose. Crea una base de datos llamada `ecommer`.
+
+### 3. Configurar el Servidor (Backend)
+Ve a la carpeta del servidor e instala las dependencias:
+```bash
+cd server
+npm install
+```
+Crea un archivo `.env` en la carpeta `server` basado en el `.env.example`:
+```env
+DATABASE_URL=postgres://tu_usuario:tu_contrasena@localhost:5432/ecommer
+PORT=5000
+JWT_SECRET=tu_clave_secreta_super_segura
+```
+
+**Poblar la base de datos (opcional):**
+Ejecuta el script de seed para cargar productos iniciales con imágenes:
+```bash
+node seed.js
+```
+
+### 4. Configurar el Frontend
+Regresa a la raíz e instala las dependencias:
+```bash
+cd ..
+npm install
+```
+
+### 5. Ejecución
+Debes iniciar ambos procesos simultáneamente (en terminales separadas):
+
+**Iniciar Backend:**
+```bash
+cd server
+npm run dev
+```
+
+**Iniciar Frontend:**
+```bash
+# Desde la raíz de ecommer-react
+npm run dev
+```
+
+La aplicación estará disponible en `http://localhost:5173`.
+
+---
+
+## 🔑 Gestión de Administradores
+
+Para convertir a un usuario registrado en administrador, ejecuta el siguiente comando desde la carpeta `server`:
+```bash
+node makeAdmin.js tu_correo@ejemplo.com
+```
+
+---
+
+## 📝 Licencia
+Este proyecto fue desarrollado por **Cristian** como una solución de e-commerce profesional.
