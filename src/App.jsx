@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import MyOrders from './pages/MyOrders';
 import AdminPanel from './pages/AdminPanel';
+import Wishlist from './pages/Wishlist';
 import { Toaster } from 'sonner';
 import './App.css';
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Register />} />
           <Route path="/mis-ordenes" element={<MyOrders />} />
+          <Route path="/favoritos" element={<Wishlist />} />
           <Route path="/admin" element={<AdminPanel />} />
         </Routes>
       </main>

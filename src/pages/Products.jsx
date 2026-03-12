@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import { ShoppingCart, SearchX, Loader2, Filter, ChevronRight, Star } from 'lucide-react';
+import { ShoppingCart, SearchX, Loader2, Filter, ChevronRight, Star, Heart } from 'lucide-react';
+import { useWishlist } from '../context/WishlistContext';
 
 const Products = () => {
   const { addToCart } = useCart();
+  const { toggleWishlist, isWishlisted } = useWishlist();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   
@@ -167,8 +169,32 @@ const Products = () => {
                 onClick={() => navigate(`/producto/${product.id}`)}
                 style={{ cursor: 'pointer' }}
               >
-                <div className="product-image-container">
+                <div className="product-image-container" style={{ position: 'relative' }}>
                   <img src={product.image_url} alt={product.name} className="product-image" />
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleWishlist(product);
+                    }}
+                    style={{
+                      position: 'absolute',
+                      top: '10px',
+                      right: '10px',
+                      width: '36px',
+                      height: '36px',
+                      borderRadius: '50%',
+                      border: 'none',
+                      backgroundColor: 'white',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      boxShadow: '0 4px 10px rgba(0,0,0,0.12)'
+                    }}
+                    aria-label="Agregar a favoritos"
+                  >
+                    <Heart size={18} color={isWishlisted(product.id) ? '#ef4444' : '#64748b'} fill={isWishlisted(product.id) ? '#ef4444' : 'none'} />
+                  </button>
                 </div>
                 <div className="product-info">
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

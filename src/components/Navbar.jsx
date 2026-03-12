@@ -1,12 +1,14 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { ShoppingCart, Laptop, Home, User, Search, LogOut, Package, Shield, X } from 'lucide-react';
+import { ShoppingCart, Laptop, Home, User, Search, LogOut, Package, Shield, X, Heart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
+import { useWishlist } from '../context/WishlistContext';
 
 const Navbar = () => {
   const { cartCount } = useCart();
+  const { wishlistCount } = useWishlist();
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   
@@ -210,6 +212,12 @@ const Navbar = () => {
             </Link>
           </li>
         )}
+        <li style={{ position: 'relative' }}>
+          <Link to="/favoritos" style={{ color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <Heart size={22} />
+            {wishlistCount > 0 && <span style={{ position: 'absolute', top: '-8px', right: '-10px', backgroundColor: '#f59e0b', borderRadius: '50%', padding: '2px 6px', fontSize: '0.7rem', fontWeight: 'bold' }}>{wishlistCount}</span>}
+          </Link>
+        </li>
         <li style={{ position: 'relative' }}>
           <Link to="/carrito" style={{ color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' }}>
             <ShoppingCart size={22} />
